@@ -221,9 +221,10 @@ GameObject:
   - component: {fileID: 690278336}
   - component: {fileID: 690278338}
   - component: {fileID: 690278337}
+  - component: {fileID: 690278339}
   m_Layer: 0
   m_Name: Black
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 690278332}
   spawnPoint: {fileID: 1390419652}
-  minSpeed: 2
+  minSpeed: 3
   maxSpeed: 10
 --- !u!50 &690278337
 Rigidbody2D:
@@ -360,7 +361,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690278332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -379,6 +380,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2}
   m_EdgeRadius: 0
+--- !u!58 &690278339
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690278332}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.05, y: 0.03}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1 &696118048
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,9 +664,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
+  m_Offset: {x: -0.21, y: 0.16}
   serializedVersion: 2
-  m_Radius: 1.38
+  m_Radius: 1
 --- !u!1 &1390419650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1078,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386465868545444}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1157,7 +1174,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4244697397726726387, guid: cc9c0c5faf8e9c240ae5f87c6cd334ae, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244697397726726387, guid: cc9c0c5faf8e9c240ae5f87c6cd334ae, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244697397726726387, guid: cc9c0c5faf8e9c240ae5f87c6cd334ae, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4244697397726726387, guid: cc9c0c5faf8e9c240ae5f87c6cd334ae, type: 3}
       propertyPath: m_IsTrigger

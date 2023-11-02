@@ -7,24 +7,29 @@ public class EnemyBlack : MonoBehaviour
     public GameObject enemyPrefab; // 생성할 적의 프리팹
     public Transform spawnPoint; // 적의 생성 위치
 
+
     [SerializeField]
     float minSpeed; // 최소 이동 속도
     [SerializeField]
     float maxSpeed; // 최대 이동 속도
 
-    float spawnInterval = 4f; // 적 생성 간격
-    float enemyLifeTime = 7f; // 적의 수명 (삭제 시간)
+    float spawnInterval = 3f; // 적 생성 간격
+    float enemyLifeTime = 6f; // 적의 수명 (삭제 시간)
 
-    private float timer = 0f;
+    //아니 나타나는 고양이 수가 왜 점점 많이=ㅏ지지
+
+    private float BlackCatTimer = 0f;
+    private bool fx = true;
 
     void Update()
     {
-        timer += Time.deltaTime;
+        BlackCatTimer += Time.deltaTime;
 
-        if (timer >= spawnInterval)
+        if (BlackCatTimer >= spawnInterval && fx )
         {
             SpawnEnemy();
-            timer = 0f;
+            BlackCatTimer = 0f;
+            fx = false;
         }
     }
 
@@ -35,7 +40,7 @@ public class EnemyBlack : MonoBehaviour
 
         // 적 오브젝트 생성
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
+        Debug.Log("생성핻다", enemy);
         // 적 오브젝트에 Rigidbody2D를 가지고 있어야 이동
         Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
 
@@ -47,4 +52,6 @@ public class EnemyBlack : MonoBehaviour
 
         Destroy(enemy, enemyLifeTime);
     }
+
+
 }
