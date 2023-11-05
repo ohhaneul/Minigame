@@ -16,7 +16,6 @@ public class EnemyBlack : MonoBehaviour
     float spawnInterval = 3f; // 적 생성 간격
     float enemyLifeTime = 6f; // 적의 수명 (삭제 시간)
 
-    //아니 나타나는 고양이 수가 왜 점점 많이=ㅏ지지
 
     private float BlackCatTimer = 0f;
     private bool fx = true;

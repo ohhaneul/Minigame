@@ -77,9 +77,7 @@ public class CharacterControl : MonoBehaviour
             float questionX = Mathf.Abs(transform.position.x - collision.transform.position.x);
 
 
-            if (0.4f <= questionY && questionY <= 0.6f &&
-                questionX <= 1.5f)
-                // 너무 빗겨맞아도 안되니까 x 좌표도 참고
+            if (0.4f < questionY && questionY < 0.5f && questionX <= 0.5f)
             {
                 live(collision.gameObject);
             }
@@ -102,6 +100,7 @@ public class CharacterControl : MonoBehaviour
         rigid.gravityScale = 2;
         rigid.velocity = Vector2.zero;  
         rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
+        Debug.Log("머리 밟고 점프 : " + enemy.name);
     }
 
 

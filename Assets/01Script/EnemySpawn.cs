@@ -27,12 +27,12 @@ public class EnemySpawn : MonoBehaviour
 
     //캐릭터한테 닿으면 ~
     // 아직은 그냥 게임오버로 해놨는데 나중에 여기 기능 추가해서 쓸만하다!
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("MyCat"))
-        {
-              
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.name.Equals("MyCat"))
+    //    {
+    //        Time.timeScale = 0f;
+    //    }
+    //}
 
 }
