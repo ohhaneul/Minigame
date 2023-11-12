@@ -14,33 +14,79 @@ public class EnemyGray2 : MonoBehaviour
     float enemyLifeTime = 12f; // 적의 수명 (삭제 시간)
     [SerializeField]
     private float MoveSpeed;
+    float moveMaxX;
+    private SpriteRenderer sr;
 
     //private float BackSpeed;
+    private int turnCounter;
 
     private void Awake()
     {
         moveDir = -1;
-        randomTime = Random.Range(0.5f, 1f) + 4f; //첫 등장 2초 유지, 랜덤 시간 최소, 최대
+        randomTime = Random.Range(0.5f, 1f) +2f; //첫 등장 4초 유지, 랜덤 시간 최소, 최대
+        TryGetComponent<SpriteRenderer>(out sr);
         //BackSpeed = MoveSpeed;
+        moveMaxX  = -1f + Random.Range(-0.3f, 0.3f);
+        turnCounter = 4;
     }
+
+
 
     private void Update()
     {
-        randomTime -= Time.deltaTime;
-        enemyLifeTime -= Time.deltaTime;
-        if (enemyLifeTime < 0f)
-        {
-            Destroy(this.gameObject);
+        //randomTime -= Time.deltaTime;
+        //enemyLifeTime -= Time.deltaTime;
+        //if (enemyLifeTime < 0f)
+        //{
+        //    Destroy(this.gameObject);
+        //}
+
+        if (turnCounter > 0)
+        { 
+            if (moveMaxX > transform.position.x && moveDir < 0f)
+            {
+                moveMaxX = 1.5f;
+                moveDir = 1f;   
+                sr.flipX = true;
+                MoveSpeed = 2f; //후진속도
+                turnCounter--;
+            }
+            if (moveMaxX < transform.position.x && moveDir > 0f)
+            {
+                moveMaxX = -1f + Random.Range(-0.3f, 0.3f);
+                moveDir = -1f;  
+                sr.flipX = false;
+                MoveSpeed = 3f; // 전진속도
+                turnCounter--;
+            }
         }
 
-        if (randomTime < 0f)
+        if(transform.position.x < -3f)
         {
-            MoveSpeed = MoveSpeed / 2;
-            randomTime = Random.Range(0.5f, 1f);
-            moveDir *= -1f; //  음수의 곱으로 방향전환
-            MoveSpeed = MoveSpeed * 2;
-            //MoveSpeed = BackSpeed;
+            Destroy(gameObject);
         }
-        transform.position += new Vector3(moveDir * Time.deltaTime * MoveSpeed, 0f, 0f);    // 실제이동
+
+            //if (randomTime < 0f)
+            //{
+            //    //MoveSpeed = MoveSpeed / 2f;
+            //    randomTime = 3f;// Random.Range(0.5f, 1f);
+            //    moveDir *= -1f; //  음수의 곱으로 방향전환
+            //    Debug.Log("방향전환1");
+            //    if (moveDir < 0f)
+            //    {
+            //        Debug.Log("방향전환2");
+            //        MoveSpeed = 5f;
+            //        sr.flipX = false;
+            //    }
+            //    else
+            //    {
+            //        Debug.Log("방향전환3");
+            //        MoveSpeed = 1f;
+            //        sr.flipX = true;
+            //    }
+            //    //MoveSpeed = MoveSpeed * 2f;
+            //    //MoveSpeed = BackSpeed;
+            //}
+            transform.position += new Vector3(moveDir * Time.deltaTime * MoveSpeed, 0f, 0f);    // 실제이동
     }
 }

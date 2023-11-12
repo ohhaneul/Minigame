@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class BreadObj : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class BreadObj : MonoBehaviour
     {
         moveDir = new Vector3(-1f, 0f, 0f);
         ItemLifeTime += Time.time;
-        
+
     }
 
     private void Update()
@@ -30,9 +32,8 @@ public class BreadObj : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("음식에 닿음");
-            Destroy(this.gameObject);   
-                                        
+            Debug.Log("아이템에 닿음");
+            Destroy(this.gameObject);
         }
     }
 

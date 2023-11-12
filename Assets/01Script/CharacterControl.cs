@@ -10,8 +10,22 @@ public class CharacterControl : MonoBehaviour
     public float JumpPower;
     public bool isJump = false;
     GameObject player;
-
+    ScoreController scoreController;
+    ScoreController scoreController2;
+    JumpCount jumpScript;
     int count = 0;
+    public int JumpCounter
+    {
+        get => count;
+        set
+        {
+            count = value;
+            if(jumpScript != null)
+            {
+                jumpScript.JumpIconUpdate(4 - count);
+            }
+        }
+    }
 
     void Start()
 {
@@ -22,6 +36,12 @@ public class CharacterControl : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        scoreController = GameObject.Find("Score").GetComponent<ScoreController>();
+        scoreController2 = GameObject.Find("FinalScore").GetComponent<ScoreController>();
+        Debug.Log("참조 확인" + scoreController.gameObject.name);
+
+        jumpScript = GameObject.Find("JumpChance").GetComponent<JumpCount>();
+
     }
 
     private void Update()
@@ -40,7 +60,7 @@ public class CharacterControl : MonoBehaviour
                 isJump = true;
                 rigid.velocity = Vector2.zero;  // 점프 속도 유지
                 rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
-                count++;
+                JumpCounter++;
             }
 
             else
@@ -65,7 +85,7 @@ public class CharacterControl : MonoBehaviour
         if (collision.gameObject.name.Equals("Ground"))
         {
             isJump = false;
-            count = 0;
+            JumpCounter = 0;
             rigid.gravityScale = 0f;
             rigid.velocity = Vector2.zero;
         }
@@ -77,9 +97,12 @@ public class CharacterControl : MonoBehaviour
             float questionX = Mathf.Abs(transform.position.x - collision.transform.position.x);
 
 
-            if (0.4f < questionY && questionY < 0.5f && questionX <= 0.5f)
+            if (0.4f < questionY && questionY < 0.7f && questionX <= 0.7f)
             {
                 live(collision.gameObject);
+                scoreController.Score_300();
+                scoreController2.Score_300();
+                Debug.Log("머리 밟기 +300점");
             }
             else
             {
@@ -88,6 +111,14 @@ public class CharacterControl : MonoBehaviour
             }
 
         }
+
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            Debug.Log("아이템 +300점");
+            scoreController.Score_300();
+            scoreController2.Score_300();
+        }
+
     }
 
     void Die(GameObject enemy)
