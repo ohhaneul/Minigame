@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour
 {
@@ -28,9 +29,9 @@ public class CharacterControl : MonoBehaviour
     }
 
     void Start()
-{
-    this.player = GameObject.FindGameObjectWithTag("Player");
-}
+    {
+        this.player = GameObject.FindGameObjectWithTag("Player");
+    }
 
 
     private void Awake()
@@ -46,12 +47,22 @@ public class CharacterControl : MonoBehaviour
 
     private void Update()
     {
-        Jump();
+        if (Time.timeScale != 0)
+        {
+            Jump();
+        }
+        //else
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        RestartGame(); // 시간이 멈춰있을 때 스페이스바를 누르면 게임을 재시작
+        //    }
+        //}
     }
 
-    public void Jump()
+    public void Jump()  //점프
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))    
         {
 
             if (count < 4)
@@ -133,7 +144,25 @@ public class CharacterControl : MonoBehaviour
         rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
         Debug.Log("머리 밟고 점프 : " + enemy.name);
     }
+    //리게임
+    //void RestartGame()
+    //{
+    //    Time.timeScale = 1f; //게임재개
+    //    ResetObjects();
+    //    Scene currentScene = SceneManager.GetActiveScene();
+    //    SceneManager.LoadScene(currentScene.name);
+    //}
 
+    //// 모든 오브젝트들을 초기 위치로 되돌리는 함수
+    //void ResetObjects()
+    //{
+    //    // "Resettable" 스크립트가 있는 모든 오브젝트들을 찾아 초기화합니다.
+    //    Resettable[] resettables = FindObjectsOfType<Resettable>();
+    //    foreach (Resettable resettable in resettables)
+    //    {
+    //        resettable.Reset(); // Resettable 스크립트의 Reset 함수 호출
+    //    }
+    //}
 
 }
 
