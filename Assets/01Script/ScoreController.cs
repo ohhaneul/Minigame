@@ -25,6 +25,12 @@ public class ScoreController : MonoBehaviour
         SetText();
     }
 
+    public void Score_1000()
+    {
+        score += 1000;
+        SetText();
+    }
+
     public void SetText()
     {
         text.text = "Score : " + score.ToString();

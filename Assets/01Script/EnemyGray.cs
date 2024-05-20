@@ -12,8 +12,6 @@ public class EnemyGray : MonoBehaviour
     // 설정
     float spawnInterval = 2f; // 적 생성 간격
     float enemyLifeTime = 10f; // 적의 수명 (삭제 시간)
-    float minRandomTime = 2f; // 랜덤 시간의 최소값
-    float maxRandomTime = 3f; // 랜덤 시간의 최대값
 
     private float GrayCatTimer = 0f;// 적 기준 시간
     private float moveTimer = 3f;   // 방향을 바꾸는 간격

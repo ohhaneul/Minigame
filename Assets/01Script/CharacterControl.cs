@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class CharacterControl : MonoBehaviour
 {
     [SerializeField]
+    private GameObject UI;
+    [SerializeField]
     private Rigidbody2D rigid;
     [SerializeField]
     public float JumpPower;
@@ -108,7 +110,7 @@ public class CharacterControl : MonoBehaviour
             float questionX = Mathf.Abs(transform.position.x - collision.transform.position.x);
 
 
-            if (0.4f < questionY && questionY < 0.7f && questionX <= 0.7f)
+            if (0.4f < questionY && questionY < 1f && questionX <= 1f)
             {
                 live(collision.gameObject);
                 scoreController.Score_300();
@@ -130,12 +132,20 @@ public class CharacterControl : MonoBehaviour
             scoreController2.Score_300();
         }
 
+        if (collision.gameObject.CompareTag("Rice"))
+        {
+            Debug.Log("아이템 +1000점");
+            scoreController.Score_1000();
+            scoreController2.Score_1000();
+        }
+
     }
 
     void Die(GameObject enemy)
     {
         Time.timeScale = 0f;
         Debug.Log("교통사고 : " + enemy.name);
+        SetGameOverUI();
     }
     void live(GameObject enemy)
     {
@@ -144,25 +154,15 @@ public class CharacterControl : MonoBehaviour
         rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
         Debug.Log("머리 밟고 점프 : " + enemy.name);
     }
-    //리게임
-    //void RestartGame()
-    //{
-    //    Time.timeScale = 1f; //게임재개
-    //    ResetObjects();
-    //    Scene currentScene = SceneManager.GetActiveScene();
-    //    SceneManager.LoadScene(currentScene.name);
-    //}
+    public void SetGameOverUI()
+    {
+        Debug.Log("호출돼써용");
+        LeanTween.moveLocalY(UI, -50f, 0.5f)   //y축 좌표를 저만큼 0.5초 동안 위로 이동 
+            .setDelay(0.5f)
+            .setEase(LeanTweenType.easeInOutCubic)
+            .setIgnoreTimeScale(true); //부드럽게
+    }
 
-    //// 모든 오브젝트들을 초기 위치로 되돌리는 함수
-    //void ResetObjects()
-    //{
-    //    // "Resettable" 스크립트가 있는 모든 오브젝트들을 찾아 초기화합니다.
-    //    Resettable[] resettables = FindObjectsOfType<Resettable>();
-    //    foreach (Resettable resettable in resettables)
-    //    {
-    //        resettable.Reset(); // Resettable 스크립트의 Reset 함수 호출
-    //    }
-    //}
 
 }
 

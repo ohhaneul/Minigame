@@ -173,4 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4598139fd3de1b488a30147193c8860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4741651406278418799}
+  spawnPoint: {fileID: 4741651406278418797}
   MoveSpeed: 3

@@ -20,10 +20,10 @@ public class BreadSpawner : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(1f);    //템 생성 간격
+            yield return new WaitForSeconds(2.5f);    //템 생성 간격
 
             Vector2 position = new Vector2(transform.position.x,
-                                    Random.Range(-2f, 3.3f)); // 스폰포인트로부터 높이만 변경
+                                    Random.Range(-2f, 2f)); // 스폰포인트로부터 높이만 변경
 
             GameObject Bread = Instantiate(prefab, position, Quaternion.identity);
             //Debug.Log("스포너에서 ");
